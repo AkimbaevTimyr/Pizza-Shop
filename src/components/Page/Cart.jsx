@@ -109,16 +109,17 @@ export const Cart = observer(() => {
             </div>
             <div className="content__items">
               {ord.map((el, index) => (
-                <CartItem
-                  key={index}
-                  id={el.id}
-                  image={el.image}
-                  name={el.name}
-                  price={el.price}
-                  size={el.size}
-                  type={el.type}
-                  counts={el.pizzasCounts}
-                />
+                
+                el.pizzasCounts === 0 ? '' : <CartItem
+                key={index}
+                id={el.id}
+                image={el.image}
+                name={el.name}
+                price={el.price}
+                size={el.size}
+                type={el.type}
+                counts={el.pizzasCounts}
+              /> 
                
               ))}
             </div>
