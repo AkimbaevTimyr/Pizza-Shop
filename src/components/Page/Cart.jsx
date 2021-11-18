@@ -5,6 +5,7 @@ import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import { useCart } from "../hooks/useCart";
 import { Link } from "react-router-dom";
+import Modal from './Modal'
 export const Cart = observer(() => {
   const ord = toJS(orders.orders);
   const clearCart = () => {
@@ -12,6 +13,7 @@ export const Cart = observer(() => {
   };
   const counts = toJS(orders.totalCount);
   const { totalPrice } = useCart();
+  const [open, setOpen] = React.useState(false)
   return (
     <div className="content">
       {counts === 0 ? (
@@ -153,7 +155,7 @@ export const Cart = observer(() => {
                     <span>Вернуться назад</span>
                   </Link>
                 </div>
-                <div className="button pay-btn">
+                <div onClick={()=> setOpen(!open)} className="button pay-btn">
                   <span>Оплатить сейчас</span>
                 </div>
               </div>
@@ -161,6 +163,7 @@ export const Cart = observer(() => {
           </div>
         </div>
       )}
+      {open === false ? '' : <Modal counts={counts}close={()=> setOpen(!open)} />}
     </div>
   );
 });
